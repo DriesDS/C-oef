@@ -1,0 +1,14 @@
+# Uncomment next two lines to write output to file 'trapz.pdf'.
+set terminal pdf enhanced;
+set output 'trapz.pdf';
+
+set logscale;
+set key left bottom;
+set xlabel 'N';
+set ylabel 'abs err';
+
+# Example of plotting two data files "float" and "double" on same graph:
+plot "data" using 1:2 with linespoint title "float", /
+	"data" using 1:3 with linespoint title "double", /
+	"data" using 1:4 with linespoint title "long double";
+
