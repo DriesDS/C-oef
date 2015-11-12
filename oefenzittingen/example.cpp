@@ -59,12 +59,16 @@ void matvec( Vector const& x, Vector& y ) {
 int main(int argc, char* argv[]) {
 	std::size_t n = 128;
 	long double ild;
+	double id;
+	float ifl;
 	if(argc > 1) parse(argv[1],n);
 	
 	std::vector<float> xf(n-1) ;
 	std::vector<double> xd(n-1) ;
 	std::vector<long double> xld(n-1) ;
 	std::vector<long double> bld(n-1) ;
+	std::vector<double> bd(n-1) ;
+	std::vector<float> bf(n-1) ;
 	std::vector<long double> s(n-1) ;
 	std::vector<long double> errf(n-1);
 	std::vector<long double> errd(n-1);
@@ -76,15 +80,19 @@ int main(int argc, char* argv[]) {
 	//initialize x and b appropriately
 	for (std::size_t i=0; i<xf.size(); ++i) {
 		ild = static_cast<long double>(i+1);
+		id = static_cast<double>(i+1);
+		ifl = static_cast<float>(i+1);
 		xld[i] = 0;
 		xf[i] = 0;
 		xd[i] = 0;
 		bld[i] = -(3*ild/n+pow(ild/n,2))*exp(ild/n);
+		bd[i] = -(3*id/n+pow(id/n,2))*exp(id/n);
+		bf[i] = -(3*ifl/n+pow(ifl/n,2))*exp(ifl/n);
 		s[i] = (ild/n)*exp(ild/n)-pow(ild/n,2)*exp(ild/n);
 	}
 
-	tws::cg(matvec<std::vector<float>>,xf,bld);
-	tws::cg(matvec<std::vector<double>>,xd,bld);
+	tws::cg(matvec<std::vector<float>>,xf,bf);
+	tws::cg(matvec<std::vector<double>>,xd,bd);
 	tws::cg(matvec<std::vector<long double>>,xld,bld);
 	
 	std::transform(xf.begin(),xf.end(),s.begin(),errf.begin(),std::minus<long double>());
