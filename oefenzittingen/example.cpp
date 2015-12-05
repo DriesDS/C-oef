@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
 	for(std::size_t i=0; i<errf.size(); ++i) {
 		if(errf[i] < 0) errf[i] *= -1;
 		if(errd[i] < 0) errd[i] *= -1;
-	        if(errld[i] < 0) errld[i] *= -1;
+	    if(errld[i] < 0) errld[i] *= -1;
 	}
 
 	long double maxerrf = *max_element(errf.begin(),errf.end());
