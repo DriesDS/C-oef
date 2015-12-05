@@ -29,34 +29,37 @@ struct matvec {
 } ;
 
 int main() {
-  tws::vector b(100) ;
-  tws::vector x(100) ;
-  tws::vector s(100) ;
-  tws::vector err(100) ;
-  double prod;
+  int n = 100 ;
+  tws::vector b(n) ;
+  tws::vector x(n) ;
+  tws::vector s(n) ;
+  tws::vector err(n) ;
+  //double prod;
   double maxerr;
+  double id;
 
   //initialize x and b appropriately
   for (int i=0; i<x.size(); ++i) {
     id = static_cast<double>(i+1);
     x[i] = 0;
     b[i] = -(3*id/n+pow(id/n,2))*exp(id/n);
-    s[i] = (ild/n)*exp(ild/n)-pow(ild/n,2)*exp(ild/n);
+    s[i] = (id/n)*exp(id/n)-pow(id/n,2)*exp(id/n);
   }
 
   tws::cg( matvec(), x, b, 1.e-5, 40 ) ;
 
   maxerr = 0;
   for(int i=0; i<x.size(); ++i) {
-    err[i] = abs( s[i]-x[i] );
-    if ( abs( s[i]-x[i] ) > maxerr ) {
-      maxerr = abs( s[i]-x[i] ) ;
+    err[i] = std::abs( s[i]-x[i] );
+    if ( std::abs( s[i]-x[i] ) > maxerr ) {
+      maxerr = std::abs( s[i]-x[i] ) ;
     }
   }
 
   std::cout << "maximal error: " << maxerr << std::endl;
   std::cout << x << std::endl ;
-  std::cout << prod << std::endl ;
+  std::cout << s << std::endl ;
+  //std::cout << prod << std::endl ;
 
   return 0 ;
 }
