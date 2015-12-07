@@ -2,12 +2,13 @@
 #define vector_sum_hpp
 
 #include <cassert>
+#include <type_traits>
 
 namespace tws {
   template <typename V1, typename V2>
   class vector_sum {
     public:
-      typedef double                         value_type ;
+      //typedef double                         value_type ;
       typedef typename V1::size_type size_type ;
 
     public:
@@ -22,7 +23,7 @@ namespace tws {
         return v1_.size() ;
       }
 
-      value_type operator[]( size_type const& i ) const { return v1_[i]+v2_[i]; }
+      auto operator[]( size_type const& i ) const { return v1_[i]+v2_[i]; }
 
     private:
       V1 const v1_ ;
@@ -107,11 +108,11 @@ namespace tws {
   template <typename V1, typename V2>
     vector_diff<V1,V2> operator-( V1 const& v1, V2 const& v2 ) {return vector_diff<V1,V2>(v1,v2);}
 
-  template <typename V1>
-    std::enable_if<is_scalar<V1>::value> vector_scal_prod<V1> operator*( double const& scal, V1 const& v1) {return vector_scal_prod<V1>(v1, scal) ; }
+  template <typename scal, typename V2>
+    typename std::enable_if<std::is_scalar<scal>::value, vector_scal_prod<V2> >::type operator*( scal const& s, V2 const& v2) {return vector_scal_prod<V2>(v2, s) ; }
 
-  template <typename V1>
-    std::enable_if<! is_scalar<V1>::value> vector_scal_prod<V1> operator*( V2 const& v2, V1 const& v1) {return vector_prod<V1>(v1, v2) ; }
+  template <typename V1, typename V2>
+    typename std::enable_if<! std::is_scalar<V1>::value, vector_prod<V1,V2> >::type operator*( V1 const& v1, V2 const& v2) {return vector_prod<V1,V2>(v1, v2) ; }
 
 }
 

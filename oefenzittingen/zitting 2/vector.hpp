@@ -7,12 +7,13 @@
 
 namespace tws {
 
+  template <typename T>
   class vector {
     private:
-      typedef std::vector<double> data_type ;
+      typedef std::vector<T> data_type ;
      
     public:
-      typedef double  value_type ;
+      typedef T  value_type ;
       typedef int     size_type ;
       //typedef data_type::size_type size_type ;
 
@@ -60,16 +61,6 @@ namespace tws {
         }
         return *this;
       } 
-
-      template <typename V>
-      vector& operator==( const V& v ) {
-        for (size_type i=0; i<size(); ++i) {
-          if (! data_[i]==v[i]) {
-            return false;
-          }
-        }
-        return true;
-      }
 
     public:
       friend std::ostream& operator<<( std::ostream& ostr, vector const& v ) {
