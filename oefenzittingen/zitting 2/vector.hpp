@@ -61,6 +61,16 @@ namespace tws {
         return *this;
       } 
 
+      template <typename V>
+      vector& operator==( const V& v ) {
+        for (size_type i=0; i<size(); ++i) {
+          if (! data_[i]==v[i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
     public:
       friend std::ostream& operator<<( std::ostream& ostr, vector const& v ) {
         ostr << "(" << v.size() << ")[" ;
@@ -82,7 +92,7 @@ namespace tws {
       inner_res += v1[i]*v2[i] ; 
     }
     return inner_res;
-  } 
+  }
 
 }
 

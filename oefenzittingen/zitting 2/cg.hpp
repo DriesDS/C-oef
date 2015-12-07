@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <type_traits>
+#include <iostream>
 
 #include "vector_sum.hpp"
 #include "vector.hpp"
@@ -56,7 +57,10 @@ namespace tws {
 
     for ( int it=0 ; it<max_it; ++it ) {
       rho1 = inner_prod( r, r ) ;
-      if ( rho1 < tolerance*tolerance ) return ;
+      if ( rho1 < tolerance*tolerance ) {
+        std::cout << "tolerance met" << "rho1: " << rho1 <<std::endl;
+        return ;
+      }
 
       if (it==0) {
         p = r ;
@@ -69,7 +73,9 @@ namespace tws {
       r -= alpha * q ;
 
       rho2 = rho1 ;
+      std::cout << it << std::endl;
     }
+
   } // cg
 }
 

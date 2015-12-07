@@ -9,7 +9,7 @@ test1: test_cg.o vector.o vector_sum.o #cg.o
 	@g++ -o test1 $(LDFLAGS) test_cg.cpp # vector.o vector_sum.o #cg.o $(LIBS)
 
 test_cg.o : test_cg.cpp $(EXAMPLE_DEPS)
-	@g++ -c -std=c++11 -Wall   -O3 -fprefetch-loop-arrays -funroll-loops -ffast-math -DNDEBUG $(CXXFLAGS)  test_cg.cpp
+	@g++ -c -std=c++11 -Wall    -fprefetch-loop-arrays -funroll-loops -ffast-math -DNDEBUG $(CXXFLAGS)  test_cg.cpp
 
 vector.o: vector.hpp
 	@g++ -c vector.hpp $(LDFLAGS) $(LIBS)
