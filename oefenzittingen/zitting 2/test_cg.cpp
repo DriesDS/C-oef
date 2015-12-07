@@ -48,7 +48,7 @@ int main() {
   prod = inner_prod(x,b);
   std::cout << prod << std::endl;
 
-  std::cout << x + 2*b - x -2*b << std::endl;
+  std::cout << x + 2*b - x -2*b + b*x - 2*x << std::endl;
   std::cout << prod << std::endl ;
 
   return 0 ;
