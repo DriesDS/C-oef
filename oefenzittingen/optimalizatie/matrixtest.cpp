@@ -28,7 +28,7 @@ struct MatrixTest
 
     void operator()()
     {
-       C = A + (B + (A + A + A) + B) + B;       
+       C = A * (B + (A + A * A) + B) + B;       
     }
 
     void use_result()

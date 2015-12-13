@@ -90,6 +90,13 @@ namespace tws {
         return BinX<std::plus<typename std::common_type<typename Right::value_type, typename Left::value_type>::type>, Left, Right>(left, right);
     }
 
+    template <typename Left, typename Right>
+    BinX< std::multiplies<typename std::common_type<typename Right::value_type, typename Left::value_type>::type>, Left, Right> 
+    operator*(const Left& left, const Right& right)
+    {
+        return BinX<std::multiplies<typename std::common_type<typename Right::value_type, typename Left::value_type>::type>, Left, Right>(left, right);
+    }
+
 }
 
 #endif

@@ -17,11 +17,11 @@ struct SumTest
     void operator()()
     {
         sum = 0;
-        for(std::size_t i = 0; i < N/4; i=i+4) {
-            sum += a[i];
-            sum += a[i+1];
-            sum += a[i+2];
-            sum += a[i+3];
+        for(std::size_t i = 0; i < N/4; i=++) {
+            sum += a[i*4];
+            sum += a[i*4+1];
+            sum += a[i*4+2];
+            sum += a[i*4+3];
         }
     }
     
